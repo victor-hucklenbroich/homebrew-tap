@@ -1,0 +1,38 @@
+# Lints the tap on every push/PR including the automated version bumps pushed
+# by the desk-controller release workflow so a malformed cask/formula never
+# lands silently.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  HOMEBREW_NO_AUTO_UPDATE: "1"
+  HOMEBREW_NO_INSTALL_CLEANUP: "1"
+
+jobs:
+  audit:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # brew's style/audit commands only operate on installed taps, so expose
+      # this checkout as the tap instead of cloning it a second time.
+      - name: Register checkout as victor-hucklenbroich/tap
+        run: |
+          tap_dir="$(brew --repository)/Library/Taps/victor-hucklenbroich/homebrew-tap"
+          mkdir -p "$(dirname "$tap_dir")"
+          ln -s "$GITHUB_WORKSPACE" "$tap_dir"
+
+      - name: brew style
+        run: brew style victor-hucklenbroich/tap
+
+      - name: Audit formula
+        run: brew audit --online victor-hucklenbroich/tap/linak-controller
+
+      # --online also verifies the release zip referenced by the cask actually
+      # exists, catching a bump that points at a missing asset.
+      - name: Audit cask
+        run: brew audit --cask --online victor-hucklenbroich/tap/desk-controller
