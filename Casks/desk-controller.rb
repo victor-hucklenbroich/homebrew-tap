@@ -2,7 +2,7 @@ cask "desk-controller" do
   version "1.0.0"
   sha256 "f715c57790c708e99d53a91c93360ac08dd5ffab2c0d2a68704f460867995d73"
 
-  url "https://github.com/victor-hucklenbroich/desk-controller/releases/download/v#{version}/DeskController-#{version}.zip",
+  url "https://github.com/victor-hucklenbroich/desk-controller/releases/download/v#{version}/DeskController-#{version}.zip"
   name "DeskController"
   desc "Menu bar app for Linak-based standing desks"
   homepage "https://github.com/victor-hucklenbroich/desk-controller"
