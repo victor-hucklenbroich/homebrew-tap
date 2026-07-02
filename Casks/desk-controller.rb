@@ -1,6 +1,6 @@
 cask "desk-controller" do
-  version "1.1.0"
-  sha256 "1704112ec53049c0abedae9891457209e066c823ed418690857b405969206143"
+  version "1.1.1"
+  sha256 "10e70be1e636551151493e6e27a8b135fbbe5ba2005af7a07f1957448b4046f0"
 
   url "https://github.com/victor-hucklenbroich/desk-controller/releases/download/v#{version}/DeskController-#{version}.zip"
   name "DeskController"
