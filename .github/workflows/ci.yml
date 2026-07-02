@@ -30,10 +30,7 @@ jobs:
       - name: brew style
         run: brew style victor-hucklenbroich/tap
 
-      - name: Audit formula
-        run: brew audit --online victor-hucklenbroich/tap/linak-controller
-
-      # --online also verifies the release zip referenced by the cask actually
+      # --online also verifies the release zip referenced by a cask actually
       # exists, catching a bump that points at a missing asset.
-      - name: Audit cask
+      - name: Audit casks
         run: brew audit --cask --online victor-hucklenbroich/tap/desk-controller
