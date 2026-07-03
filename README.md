@@ -22,10 +22,10 @@ app's configuration and logs.
 
 ## Available casks
 
-| Cask | Description |
-| --- | --- |
+| Cask | Description                                                           |
+| --- |-----------------------------------------------------------------------|
 | [`desk-controller`](https://github.com/victor-hucklenbroich/desk-controller) | Menu bar app for controlling Linak-based standing desks over Bluetooth |
-| [`speedtest-cli`](https://github.com/victor-hucklenbroich/speedtest-cli) | Terminal internet speed test with an animated TUI (installs the `speedtest` command) |
+| [`speedtest-cli`](https://github.com/victor-hucklenbroich/speedtest-cli) | CLI internet bandwidth speed test (installs the `speedtest` command)  |
 
 
 ## Maintenance
