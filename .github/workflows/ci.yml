@@ -30,7 +30,8 @@ jobs:
       - name: brew style
         run: brew style victor-hucklenbroich/tap
 
-      # --online also verifies the release zip referenced by a cask actually
-      # exists, catching a bump that points at a missing asset.
+      # --online also verifies the release archive referenced by a cask
+      # actually exists, catching a bump that points at a missing asset.
+      # Enumerated from Casks/ so newly added casks are covered automatically.
       - name: Audit casks
-        run: brew audit --cask --online victor-hucklenbroich/tap/desk-controller
+        run: brew audit --cask --online $(basename -s .rb Casks/*.rb | sed 's|^|victor-hucklenbroich/tap/|')
