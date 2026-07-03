@@ -34,4 +34,4 @@ jobs:
       # actually exists, catching a bump that points at a missing asset.
       # Enumerated from Casks/ so newly added casks are covered automatically.
       - name: Audit casks
-        run: brew audit --cask --online $(basename -s .rb Casks/*.rb | sed 's|^|victor-hucklenbroich/tap/|')
+        run: basename -s .rb Casks/*.rb | sed 's|^|victor-hucklenbroich/tap/|' | xargs brew audit --cask --online
