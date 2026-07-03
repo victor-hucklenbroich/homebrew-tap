@@ -25,12 +25,13 @@ app's configuration and logs.
 | Cask | Description |
 | --- | --- |
 | [`desk-controller`](https://github.com/victor-hucklenbroich/desk-controller) | Menu bar app for controlling Linak-based standing desks over Bluetooth |
+| [`speedtest-cli`](https://github.com/victor-hucklenbroich/speedtest-cli) | Terminal internet speed test with an animated TUI (installs the `speedtest` command) |
 
 
 ## Maintenance
 
 Casks are bumped automatically: tagging a release in an app's repository
-triggers a workflow there that builds, signs, and notarizes the app, publishes
-it as a GitHub Release, and pushes the new `version`/`sha256` to this tap.
+triggers a workflow there that builds the release artifacts, publishes them
+as a GitHub Release, and pushes the new `version`/`sha256` to this tap.
 CI lints the tap (`brew style` + `brew audit`) on every push, including those
 automated bumps.
