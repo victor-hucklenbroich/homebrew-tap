@@ -25,7 +25,7 @@ app's configuration and logs.
 | Cask | Description                                                           |
 | --- |-----------------------------------------------------------------------|
 | [`desk-controller`](https://github.com/victor-hucklenbroich/desk-controller) | Menu bar app for controlling Linak-based standing desks over Bluetooth |
-| [`speedtest-cli`](https://github.com/victor-hucklenbroich/speedtest-cli) | CLI internet bandwidth speed test (installs the `speedtest` command)  |
+| [`speedtest`](https://github.com/victor-hucklenbroich/speedtest-cli) | CLI internet bandwidth speed test with an animated TUI                  |
 
 
 ## Maintenance
