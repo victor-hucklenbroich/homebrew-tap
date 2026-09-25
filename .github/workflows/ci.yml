@@ -1,6 +1,11 @@
 # Lints the tap on every push/PR including the automated version bumps pushed
-# by the desk-controller release workflow so a malformed cask/formula never
-# lands silently.
+# by the desk-controller and speedtest-cli release workflows so a malformed
+# cask/formula doesn't get deployed.
+#
+# GoReleaser (speedtest-cli's release) regenerates speedtest.rb with cosmetic
+# stanza ordering that newer Homebrew rubocop rejects. The style
+# step autocorrects and commits the correction back.
+# Non-autocorrectable offenses fail the job.
 name: CI
 
 on:
@@ -16,6 +21,8 @@ env:
 jobs:
   audit:
     runs-on: macos-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -27,11 +34,26 @@ jobs:
           mkdir -p "$(dirname "$tap_dir")"
           ln -s "$GITHUB_WORKSPACE" "$tap_dir"
 
-      - name: brew style
-        run: brew style victor-hucklenbroich/tap
+      - name: brew style (autocorrect)
+        run: |
+          if brew style --fix victor-hucklenbroich/tap; then
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "brew style autocorrected:"
+              git --no-pager diff
+              if [ "${{ github.event_name }}" = "push" ]; then
+                git config user.name "github-actions[bot]"
+                git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                git commit -am "style: brew style --fix"
+                git push origin "HEAD:${{ github.ref_name }}"
+              else
+                echo "::error::Cask style is not compliant. Run 'brew style --fix' locally and commit."
+                exit 1
+              fi
+            fi
+          else
+            echo "::error::brew style found offenses it cannot autocorrect."
+            exit 1
+          fi
 
-      # --online also verifies the release archive referenced by a cask
-      # actually exists, catching a bump that points at a missing asset.
-      # Enumerated from Casks/ so newly added casks are covered automatically.
       - name: Audit casks
         run: basename -s .rb Casks/*.rb | sed 's|^|victor-hucklenbroich/tap/|' | xargs brew audit --cask --online

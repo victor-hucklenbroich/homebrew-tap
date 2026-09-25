@@ -3,24 +3,23 @@ cask "speedtest" do
   version "0.1.1"
 
   on_macos do
-    on_intel do
-      sha256 "909f48200fac136a6d193c4f98059efe8d06541118ed0918e040402141348ebd"
-      url "https://github.com/victor-hucklenbroich/speedtest-cli/releases/download/v#{version}/speedtest-cli_darwin_amd64.tar.gz"
-    end
     on_arm do
       sha256 "7710820c24b8b197f561b64a345399fadfa3200cc8b82aa1bc5fe07e0b8331e2"
       url "https://github.com/victor-hucklenbroich/speedtest-cli/releases/download/v#{version}/speedtest-cli_darwin_arm64.tar.gz"
     end
-  end
-
-  on_linux do
     on_intel do
-      sha256 "c5269a2069282dc6f073856c657dc5dc251c678d55bd59ebd138e9ba0fdead70"
-      url "https://github.com/victor-hucklenbroich/speedtest-cli/releases/download/v#{version}/speedtest-cli_linux_amd64.tar.gz"
+      sha256 "909f48200fac136a6d193c4f98059efe8d06541118ed0918e040402141348ebd"
+      url "https://github.com/victor-hucklenbroich/speedtest-cli/releases/download/v#{version}/speedtest-cli_darwin_amd64.tar.gz"
     end
+  end
+  on_linux do
     on_arm do
       sha256 "33662ef6675305457a0f32aa193b7c8badc9ac9b0e20e2a15747a8a045d3c51e"
       url "https://github.com/victor-hucklenbroich/speedtest-cli/releases/download/v#{version}/speedtest-cli_linux_arm64.tar.gz"
+    end
+    on_intel do
+      sha256 "c5269a2069282dc6f073856c657dc5dc251c678d55bd59ebd138e9ba0fdead70"
+      url "https://github.com/victor-hucklenbroich/speedtest-cli/releases/download/v#{version}/speedtest-cli_linux_amd64.tar.gz"
     end
   end
 
