@@ -6,6 +6,8 @@
 # stanza ordering that newer Homebrew rubocop rejects. The style
 # step autocorrects and commits the correction back.
 # Non-autocorrectable offenses fail the job.
+#
+# Autocorrect is limited to Casks/ (and only Casks/ is ever committed).
 name: CI
 
 on:
@@ -36,14 +38,14 @@ jobs:
 
       - name: brew style (autocorrect)
         run: |
-          if brew style --fix victor-hucklenbroich/tap; then
-            if [ -n "$(git status --porcelain)" ]; then
+          if brew style --fix Casks/*.rb; then
+            if [ -n "$(git status --porcelain -- Casks)" ]; then
               echo "brew style autocorrected:"
-              git --no-pager diff
+              git --no-pager diff -- Casks
               if [ "${{ github.event_name }}" = "push" ]; then
                 git config user.name "github-actions[bot]"
                 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                git commit -am "style: brew style --fix"
+                git commit -m "style: brew style --fix" -- Casks
                 git push origin "HEAD:${{ github.ref_name }}"
               else
                 echo "::error::Cask style is not compliant. Run 'brew style --fix' locally and commit."
