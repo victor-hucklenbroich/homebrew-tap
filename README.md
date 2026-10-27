@@ -24,8 +24,8 @@ app's configuration and logs.
 
 | Cask | Description                                                           | Install Command                                            |
 | --- |-----------------------------------------------------------------------|--------------------------------------------------------------|
-| [`desk-controller`](https://github.com/victor-hucklenbroich/desk-controller) | Menu bar app for controlling Linak-based standing desks over Bluetooth | brew install --cask victor-hucklenbroich/tap/desk-controller |
-| [`speedtest`](https://github.com/victor-hucklenbroich/speedtest-cli) | CLI internet bandwidth speed test with an animated TUI                  | brew install --cask victor-hucklenbroich/tap/speedtest-cli |
+| [`desk-controller`](https://github.com/victor-hucklenbroich/desk-controller) | Menu bar app for controlling Linak-based standing desks over Bluetooth | `brew install --cask victor-hucklenbroich/tap/desk-controller` |
+| [`speedtest`](https://github.com/victor-hucklenbroich/speedtest-cli) | CLI internet bandwidth speed test with an animated TUI                  | `brew install --cask victor-hucklenbroich/tap/speedtest-cli` |
 
 
 ## Maintenance
