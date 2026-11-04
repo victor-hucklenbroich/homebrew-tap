@@ -39,9 +39,7 @@ cask "speedtest" do
     end
   end
 
-  zap trash: [
-      "~/Library/Application Support/speedtest",
-    ]
+  zap trash: "~/Library/Application Support/speedtest"
 
   caveats <<~EOS
     Run `speedtest` for a full test, `speedtest --help` for options.
