@@ -29,12 +29,15 @@ jobs:
       - uses: actions/checkout@v7
 
       # brew's style/audit commands only operate on installed taps, so expose
-      # this checkout as the tap instead of cloning it a second time.
+      # this checkout as the tap instead of cloning it a second time. Homebrew
+      # refuses to load casks from non-official taps until they are trusted,
+      # and the runner starts with an empty trust store.
       - name: Register checkout as victor-hucklenbroich/tap
         run: |
           tap_dir="$(brew --repository)/Library/Taps/victor-hucklenbroich/homebrew-tap"
           mkdir -p "$(dirname "$tap_dir")"
           ln -s "$GITHUB_WORKSPACE" "$tap_dir"
+          brew trust --tap victor-hucklenbroich/tap
 
       - name: brew style (autocorrect)
         run: |
@@ -46,6 +49,7 @@ jobs:
                 git config user.name "github-actions[bot]"
                 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
                 git commit -m "style: brew style --fix" -- Casks
+                git pull --rebase origin "${{ github.ref_name }}"
                 git push origin "HEAD:${{ github.ref_name }}"
               else
                 echo "::error::Cask style is not compliant. Run 'brew style --fix' locally and commit."
